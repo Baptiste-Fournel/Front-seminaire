@@ -36,13 +36,14 @@ export class PopinComponent {
     }
   
     submit() {
+      const formData = this.createForm.value;
       const weaponInstance = new WeaponDTO({
         name: this.createForm.value.name,
         price: this.createForm.value.price,
       });
       console.log('Weapon created successfully:', weaponInstance);
   
-      this.weaponService.updateWeapon(this.createForm.value.weaponId,weaponInstance).subscribe(
+      this.weaponService.updateWeapon(formData.weaponId,weaponInstance).subscribe(
         (response) => {
           console.log('Weapon created successfully:', response);
           // Add any confirmation logic here
