@@ -1,0 +1,15 @@
+<h2>Modifier</h2>
+
+<div style="display: flex; flex-direction: column">
+  <form [formGroup]="createForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Prix</mat-label>
+      <input matInput formControlName="price" />
+    </mat-form-field>
+    <button mat-raised-button type="submit">Envoyer</button>
+  </form>
+</div>

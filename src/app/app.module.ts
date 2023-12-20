@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './component/form/form.component';
+import { PopinComponent } from './component/popin/popin.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     // Menu,
     ServiceViewComponent,
-    FormComponent
+    FormComponent,
+    PopinComponent 
   ],
   imports: [
     BrowserModule,

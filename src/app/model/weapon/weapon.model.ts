@@ -1,5 +1,5 @@
 export class Weapon {
-    private weaponId : number;
+    public weaponId : number;
     private weaponName : String;
     private weaponPrice : number; 
     private categoryId : number;
