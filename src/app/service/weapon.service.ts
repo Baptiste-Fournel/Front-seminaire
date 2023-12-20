@@ -31,7 +31,7 @@ export class WeaponService {
   }
 
   //PUT
-  updateWeapon(id: number, weapon: Weapon) {
+  updateWeapon(id: number, weapon: WeaponDTO) {
     return this.httpClient.put(this.url + '/' + id, weapon);
   }
 
