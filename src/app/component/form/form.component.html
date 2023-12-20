@@ -13,12 +13,11 @@
         <mat-form-field>
             <mat-label>Catégorie</mat-label>
             <mat-select formControlName="category">
-                <mat-option *ngFor="let category of categories" [value]="category.id">
-                    {{ category.name }}
+                <mat-option *ngFor="let category of categories" [value]="category['categoryId']">
+                    {{ category["categoryName"] }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <button mat-raised-button type="submit">Envoyer</button>
     </form>
-    <p>{{ createForm.value.name }}</p>
 </div>

@@ -2,14 +2,14 @@ export class Weapon {
     private weaponId : number;
     private weaponName : String;
     private weaponPrice : number; 
-    private weaponCategory : number;
+    private categoryId : number;
 
 
     constructor(data : any) {
         this.weaponId = data.weaponId ? data.weaponId : null;
         this.weaponName = data.weaponName ? data.weaponName : null;
         this.weaponPrice = data.weaponPrice ? data.weaponPrice : null;
-        this.weaponCategory = data.weaponCategory ? data.weaponCategory : null;
+        this.categoryId = data.categoryId ? data.categoryId : null;
         }
     
     
@@ -38,11 +38,11 @@ export class Weapon {
       }
 
       get getWeaponCategory(): number {
-        return this.weaponCategory;
+        return this.categoryId;
       }
     
       set setWeaponCategory(value: number) {
-        this.weaponCategory = value;
+        this.categoryId = value;
       }
 
 }

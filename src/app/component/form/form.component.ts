@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { WeaponService } from '../../service/weapon.service';
-import { Weapon } from 'src/app/model/weapon/weapon.model';
+import { WeaponDTO } from 'src/app/model/weaponDTO/weapon-dto.model';
 import { Categorie } from 'src/app/model/categorie/categorie.model'; // Update the path
 
 @Component({
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       name: '',
       price: '',
-      category: null, // Initialize category form control
+      category: [null], // Initialize category form control
     });
   }
 
@@ -28,7 +28,6 @@ export class FormComponent implements OnInit {
     this.weaponService.getCategories().subscribe(
       (categories) => {
         this.categories = categories;
-        console.log(this.categories[0].name);
       },
       (error) => {
         console.error('Error fetching categories:', error);
@@ -37,13 +36,12 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    const weaponData = {
+    const weaponInstance = new WeaponDTO({
       name: this.createForm.value.name,
       price: this.createForm.value.price,
-      category: this.createForm.value.category,
-    };
-
-    const weaponInstance = new Weapon(weaponData);
+      categoryId: this.createForm.value.category,
+    });
+    console.log('Weapon created successfully:', weaponInstance);
 
     this.weaponService.createWeapon(weaponInstance).subscribe(
       (response) => {
