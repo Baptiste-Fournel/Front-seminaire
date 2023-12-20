@@ -21,16 +21,13 @@ export class ServiceViewComponent {
   public catalog : Catalog = Object.create(null);
   location: any;
   isLoading: boolean | undefined;
-  constructor(private weaponService: WeaponService, private catalogueService: CatalogService) {}
+  constructor(private weaponService: WeaponService, private catalogueService: CatalogService,public dialog: MatDialog) {}
   
 
 
   displayedColumns: Array<string> = ["nom", "price", "action","supprimer"];
   
 
-  constructor(public dialog: MatDialog) {}
-
-  displayedColumns: Array<string> = ["nom", "price", "action"];
 
 
   createProduct (){
