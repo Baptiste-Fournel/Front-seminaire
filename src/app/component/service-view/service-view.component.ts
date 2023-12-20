@@ -3,6 +3,7 @@ import {Catalog} from "../../model/catalog/catalog.model";
 import {Weapon} from "../../model/weapon/weapon.model";
 import { WeaponService } from 'src/app/service/weapon.service';
 import { Location } from '@angular/common';
+import {CatalogService} from "../../service/catalog/catalog.service";
 
 @Component({
   selector: 'app-service-view',
@@ -14,7 +15,9 @@ export class ServiceViewComponent {
   @Input()
   public catalog : Catalog = Object.create(null);
   location: any;
-  constructor(private weaponService: WeaponService) {}
+  isLoading: boolean | undefined;
+  constructor(private weaponService: WeaponService, private catalogueService: CatalogService) {}
+  
 
   displayedColumns: Array<string> = ["nom", "price", "action","supprimer"];
   
@@ -27,13 +30,19 @@ export class ServiceViewComponent {
   this.weaponService.deleteWeapon(weaponId).subscribe(
     () => {
       console.log(`Weapon with ID ${weaponId} deleted successfully.`);
-      location.reload();
-
+      this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+        this.catalog = new Catalog(catalogBack);
+        this.isLoading = false;
+      
     },
-    (error) => {
+      (error: any) => {
+        console.error('Error loading catalog after deletion:', error);
+        this.isLoading = false; // Assurez-vous de gérer l'état de chargement en cas d'erreur
+      }),
+    (error: any) => {
       console.error('Error deleting weapon:', error);
     }
-  );
+  });
 }
 
 }

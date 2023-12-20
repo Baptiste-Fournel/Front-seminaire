@@ -4,6 +4,8 @@ import { WeaponService } from '../../service/weapon.service';
 import { WeaponDTO } from 'src/app/model/weaponDTO/weapon-dto.model';
 import { Categorie } from 'src/app/model/categorie/categorie.model'; // Update the path
 import { Location } from '@angular/common';
+import { CatalogService } from 'src/app/service/catalog/catalog.service';
+import { Catalog } from 'src/app/model/catalog/catalog.model';
 
 @Component({
   selector: 'app-form',
@@ -13,10 +15,12 @@ import { Location } from '@angular/common';
 export class FormComponent implements OnInit {
   public createForm: FormGroup;
   public categories: Categorie[] = []; // Array to store categories
-
+  public catalog : Catalog = Object.create(null);
+  isLoading: boolean | undefined;
   constructor(
     public formBuilder: FormBuilder,
-    private weaponService: WeaponService
+    private weaponService: WeaponService,
+    private catalogueService: CatalogService
   ) {
     this.createForm = this.formBuilder.group({
       name: '',
@@ -47,9 +51,13 @@ export class FormComponent implements OnInit {
     this.weaponService.createWeapon(weaponInstance).subscribe(
       (response) => {
         console.log('Weapon created successfully:', response);
-        location.reload();
+        this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+          this.catalog = new Catalog(catalogBack);
+          this.isLoading = false;
+        
+      }
         // Add any confirmation logic here
-      },
+    )},
       (error) => {
         console.error('Error creating weapon:', error);
         // Handle the error as needed
