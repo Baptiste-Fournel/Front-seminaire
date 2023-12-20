@@ -13,6 +13,7 @@ import {
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
+import { Weapon } from 'src/app/model/weapon/weapon.model';
 
 @Component({
   selector: 'app-popin',
@@ -24,11 +25,14 @@ export class PopinComponent {
 
     public createForm: FormGroup;
     public categories: Categorie[] = []; // Array to store categories
-  
+    public weapon: Weapon;
     constructor(
       public formBuilder: FormBuilder,
+      public dialogRef: MatDialogRef<PopinComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any,
       private weaponService: WeaponService
     ) {
+      this.weapon = data.weapon;
       this.createForm = this.formBuilder.group({
         name: '',
         price: '',
@@ -43,8 +47,9 @@ export class PopinComponent {
       });
       console.log('Weapon created successfully:', weaponInstance);
   
-      this.weaponService.updateWeapon(formData.weaponId,weaponInstance).subscribe(
+      this.weaponService.updateWeapon(this.weapon.weaponId,weaponInstance).subscribe(
         (response) => {
+          this.dialogRef.close()
           console.log('Weapon created successfully:', response);
           // Add any confirmation logic here
         },
