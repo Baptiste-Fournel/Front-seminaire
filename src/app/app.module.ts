@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './component/form/form.component';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     // Menu,
-    ServiceViewComponent
+    ServiceViewComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

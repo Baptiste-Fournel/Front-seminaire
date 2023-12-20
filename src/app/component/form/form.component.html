@@ -1,1 +1,24 @@
-<p>form works!</p>
+<h2>Formulaire</h2>
+
+<div style="display: flex; flex-direction: column;">
+    <form [formGroup]="createForm" (ngSubmit)="submit()">
+        <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Prix</mat-label>
+            <input matInput formControlName="price" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Catégorie</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button type="submit">Envoyer</button>
+    </form>
+    <p>{{ createForm.value.name }}</p>
+</div>
