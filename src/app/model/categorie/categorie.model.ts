@@ -1,4 +1,4 @@
-import {Produit} from "../produit/produit.model";
+import {Weapon} from "../weapon/weapon.model";
 
 export class Categorie {
 
@@ -6,15 +6,15 @@ export class Categorie {
 
   private _name : string;
 
-  private _produits : Array<Produit> = []
+  private weapons : Array<Weapon> = []
 
 
   constructor(data : any) {
     this._id = data.id ? data.id : null;
     this._name = data.name ? data.name : null;
-    if(data.produits){
-      data.produits.forEach((produit : Produit) => {
-        this._produits.push(new Produit(produit));
+    if(data.weapons){
+      data.weapons.forEach((weapon : Weapon) => {
+        this.weapons.push(new Weapon(weapon));
       });
     }
   }
@@ -36,11 +36,11 @@ export class Categorie {
     this._name = value;
   }
 
-  get produits(): Array<Produit> {
-    return this._produits;
+  get produits(): Array<Weapon> {
+    return this.weapons;
   }
 
-  set produits(value: Array<Produit>) {
-    this._produits = value;
+  set produits(value: Array<Weapon>) {
+    this.weapons = value;
   }
 }

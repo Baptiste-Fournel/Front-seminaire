@@ -1,5 +1,6 @@
 import {Component, Input, signal} from '@angular/core';
-import {Categorie} from "../../model/categorie/categorie.model";
+import {Catalog} from "../../model/catalog/catalog.model";
+import {Weapon} from "../../model/weapon/weapon.model";
 
 @Component({
   selector: 'app-service-view',
@@ -9,9 +10,9 @@ import {Categorie} from "../../model/categorie/categorie.model";
 export class ServiceViewComponent {
 
   @Input()
-  public categorie : Categorie = Object.create(null);
+  public catalog : Catalog = Object.create(null);
 
-  displayedColumns: Array<string> = Object.keys(this.categorie.produits);
+  displayedColumns: Array<string> = ["nom", "price", "action"];
 
   createProduct (){
     //todo

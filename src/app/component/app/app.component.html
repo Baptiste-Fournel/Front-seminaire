@@ -1,5 +1,14 @@
 <div style="display: flex; flex-direction: column;">
-  <h2>Formulaire</h2>
+  <ng-container>
+
+
+    <app-service-view
+    [catalog]="catalog"></app-service-view>
+
+
+</ng-container>
+
+  <!-- <h2>Formulaire</h2>
 
   <form [formGroup]="createForm">
   <mat-form-field>
@@ -10,10 +19,9 @@
     <mat-label>Champ deux</mat-label>
     <input matInput [(ngModel)]=champ2/>
   </mat-form-field>
-  <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
   <menu>
   </menu>
   <button mat-raised-button type="submit">Envoyer</button>
   </form>
-  <p>{{champ1}}</p>
+  <p>{{champ1}}</p> -->
 </div>

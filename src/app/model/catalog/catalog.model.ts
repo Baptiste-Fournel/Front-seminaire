@@ -1,23 +1,23 @@
-import {Categorie} from "../categorie/categorie.model";
+import {Weapon} from "../weapon/weapon.model";
 
 export class Catalog {
 
-  private _categorie : Array<Categorie> = [];
+  private _weapon : Array<Weapon> = [];
 
   constructor(data : any) {
-   if(data.categorie){
-     data.categorie.forEach((uneCategorie : Categorie) => {
-       this.categorie.push(new Categorie(uneCategorie));
+   if(data){
+     data.forEach((uneWeapon : Weapon) => {
+       this._weapon.push(new Weapon(uneWeapon));
      });
    }
   }
 
 
-  get categorie(): Array<Categorie> {
-    return this._categorie;
+  get weapons(): Array<Weapon> {
+    return this._weapon;
   }
 
-  set categorie(value: Array<Categorie>) {
-    this._categorie = value;
+  set weapons(value: Array<Weapon>) {
+    this._weapon = value;
   }
 }

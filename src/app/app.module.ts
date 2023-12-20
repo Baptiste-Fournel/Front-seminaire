@@ -7,19 +7,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table'; // Importez le module de tableau correspondant
 import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './component/app/app.component';
-import { Menu } from './component/menu/menu.component';
+// import { Menu } from './component/menu/menu.component';
+import { ServiceViewComponent } from './component/service-view/service-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Menu,
+    // Menu,
+    ServiceViewComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     MatCardModule,
+    MatTableModule,
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -29,6 +35,6 @@ import { Menu } from './component/menu/menu.component';
     MatMenuModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, Menu]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
