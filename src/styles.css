@@ -5,3 +5,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* styles.css */
+
+@import "~@fortawesome/fontawesome-free/css/all.css";
+.fas.fa-trash {
+    cursor: pointer;
+    padding: 5px; /* Adjust as needed */
+  }
