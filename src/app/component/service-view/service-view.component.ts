@@ -1,9 +1,14 @@
 import {Component, Input, signal} from '@angular/core';
 import {Catalog} from "../../model/catalog/catalog.model";
 import {Weapon} from "../../model/weapon/weapon.model";
+
 import { WeaponService } from 'src/app/service/weapon.service';
 import { Location } from '@angular/common';
 import {CatalogService} from "../../service/catalog/catalog.service";
+
+import {MatDialog} from '@angular/material/dialog';
+import { PopinComponent } from 'src/app/component/popin/popin.component';
+
 
 @Component({
   selector: 'app-service-view',
@@ -19,11 +24,19 @@ export class ServiceViewComponent {
   constructor(private weaponService: WeaponService, private catalogueService: CatalogService) {}
   
 
+
   displayedColumns: Array<string> = ["nom", "price", "action","supprimer"];
   
+
+  constructor(public dialog: MatDialog) {}
+
+  displayedColumns: Array<string> = ["nom", "price", "action"];
+
+
   createProduct (){
     //todo
   }
+
 
   supprimer(weaponId: number): void {
   console.log('Supprimer method called with weaponId:', weaponId);
@@ -44,5 +57,16 @@ export class ServiceViewComponent {
     }
   });
 }
+
+
+  openPopin(weapon : Weapon): void {
+    const dialogRef = this.dialog.open(PopinComponent, {
+    data : {weapon : weapon}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
 }
