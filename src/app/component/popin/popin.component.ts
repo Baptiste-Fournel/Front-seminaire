@@ -14,6 +14,8 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { Weapon } from 'src/app/model/weapon/weapon.model';
+import { CatalogService } from 'src/app/service/catalog/catalog.service';
+import { Catalog } from 'src/app/model/catalog/catalog.model';
 
 @Component({
   selector: 'app-popin',
@@ -24,10 +26,13 @@ import { Weapon } from 'src/app/model/weapon/weapon.model';
 export class PopinComponent {
 
     public createForm: FormGroup;
+    public catalog : Catalog = Object.create(null);
+    isLoading: boolean | undefined;
     public categories: Categorie[] = []; // Array to store categories
     public weapon: Weapon;
     constructor(
       public formBuilder: FormBuilder,
+      private catalogueService: CatalogService,
       public dialogRef: MatDialogRef<PopinComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any,
       private weaponService: WeaponService
@@ -49,16 +54,20 @@ export class PopinComponent {
   
       this.weaponService.updateWeapon(this.weapon.weaponId,weaponInstance).subscribe(
         (response) => {
-          this.dialogRef.close()
-          console.log('Weapon created successfully:', response);
+          
+          this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+            this.catalog = new Catalog(catalogBack);
+            this.isLoading = false;
+            this.dialogRef.close()
+            console.log('Weapon created successfully:', response);
           // Add any confirmation logic here
-        },
+          },
         (error) => {
           console.error('Error creating weapon:', error);
           // Handle the error as needed
-        }
-      );
-    }
+        })
+    });
+      }
   }
   export class DialogNoteExampleDialog {
     constructor(
