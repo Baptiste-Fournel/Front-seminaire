@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { WeaponService } from '../../service/weapon.service';
 import { WeaponDTO } from 'src/app/model/weaponDTO/weapon-dto.model';
 import { Categorie } from 'src/app/model/categorie/categorie.model'; // Update the path
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -46,6 +47,7 @@ export class FormComponent implements OnInit {
     this.weaponService.createWeapon(weaponInstance).subscribe(
       (response) => {
         console.log('Weapon created successfully:', response);
+        location.reload();
         // Add any confirmation logic here
       },
       (error) => {
