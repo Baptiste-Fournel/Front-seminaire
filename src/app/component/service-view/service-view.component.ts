@@ -3,7 +3,6 @@ import {Catalog} from "../../model/catalog/catalog.model";
 import {Weapon} from "../../model/weapon/weapon.model";
 
 import { WeaponService } from 'src/app/service/weapon.service';
-import { Location } from '@angular/common';
 import {CatalogService} from "../../service/catalog/catalog.service";
 
 import {MatDialog} from '@angular/material/dialog';
@@ -19,7 +18,6 @@ export class ServiceViewComponent {
 
   @Input()
   public catalog : Catalog = Object.create(null);
-  location: any;
   isLoading: boolean | undefined;
   constructor(private weaponService: WeaponService, private catalogueService: CatalogService,public dialog: MatDialog) {}
   

@@ -55,9 +55,9 @@ export class FormComponent implements OnInit {
           this.catalog = new Catalog(catalogBack);
           this.isLoading = false;
         
-      }
+      });
         // Add any confirmation logic here
-    )},
+      },
       (error) => {
         console.error('Error creating weapon:', error);
         // Handle the error as needed
