@@ -4,6 +4,8 @@ import {environment} from "../../environments/environment";
 import { Weapon } from '../model/weapon/weapon.model';
 import { WeaponDTO } from '../model/weaponDTO/weapon-dto.model';
 import { Categorie } from 'src/app/model/categorie/categorie.model'; // Update the path
+import { CategorieDTO } from 'src/app/model/categorieDTO/categorie-dto.model'; //
+import { Observable } from 'rxjs';
 
 
 
@@ -23,6 +25,11 @@ export class WeaponService {
   //GET
   getCategories() {
     return this.httpClient.get<Categorie[]>(this.url + '/category');
+  }
+
+  //POST
+  createCategorie(categorie: CategorieDTO): Observable<any> {
+    return this.httpClient.post(this.url + '/category', categorie);
   }
 
   //POST
