@@ -28,7 +28,7 @@ export class ServiceViewComponent {
     'nom',
     'price',
     'nomCategorie',
-    'action',
+    'modifier',
     'supprimer',
   ];
 
@@ -57,13 +57,13 @@ export class ServiceViewComponent {
   }
 
   openPopin(weapon: Weapon): void {
-    console.log(weapon["weaponCategory"]["categoryName"]);
-    // const dialogRef = this.dialog.open(PopinComponent, {
-    //   data: { weapon: weapon },
-    // });
+    // console.log(weapon['weaponCategory']['categoryName']);
+    const dialogRef = this.dialog.open(PopinComponent, {
+      data: { weapon: weapon },
+    });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('The dialog was closed');
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }
