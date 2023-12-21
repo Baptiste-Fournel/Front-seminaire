@@ -16,7 +16,7 @@ import { CategorieDTO } from 'src/app/model/categorieDTO/categorie-dto.model';
 export class FormComponent implements OnInit {
   public createForm: FormGroup;
   public categories: Categorie[] = []; // Array to store categories
-  public catalog : Catalog = Object.create(null);
+  public catalog: Catalog = Object.create(null);
   isLoading: boolean | undefined;
   constructor(
     public formBuilder: FormBuilder,
@@ -43,73 +43,82 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-  if (this.createForm.value.category == 'nouvelle') {
-    const categorieInstance = new CategorieDTO({
-      name: this.createForm.value.newCategoryName,
-    });
+    if (this.createForm.value.category == 'nouvelle') {
+      const categorieInstance = new CategorieDTO({
+        name: this.createForm.value.newCategoryName,
+      });
 
-    this.weaponService.createCategorie(categorieInstance).subscribe(
-      (createdCategory: Categorie) => {
-        console.log(
-          'Category created successfully:',
-          createdCategory,
-          'categoryid is ',
-          createdCategory['categoryId']
-        );
+      this.weaponService.createCategorie(categorieInstance).subscribe(
+        (createdCategory: Categorie) => {
+          console.log(
+            'Category created successfully:',
+            createdCategory,
+            'categoryid is ',
+            createdCategory['categoryId']
+          );
 
-        const newCategoryId = createdCategory["categoryId"];
+          const newCategoryId = createdCategory['categoryId'];
 
-        const weaponInstance = new WeaponDTO({
-          name: this.createForm.value.name,
-          price: this.createForm.value.price,
-          categoryId: newCategoryId,
-        });
+          const weaponInstance = new WeaponDTO({
+            name: this.createForm.value.name,
+            price: this.createForm.value.price,
+            categoryId: newCategoryId,
+          });
 
-        console.log('Weapon created successfully:', weaponInstance);
+          console.log('Weapon created successfully:', weaponInstance);
 
-        this.weaponService.createWeapon(weaponInstance).subscribe(
-          (response) => {
-            console.log('Weapon created successfully:', response);
-            this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
-              this.catalog = new Catalog(catalogBack);
-              this.isLoading = false;
-            });
-          },
-          (error) => {
-            console.error('Error creating weapon:', error);
-          }
-        );
+          this.weaponService.createWeapon(weaponInstance).subscribe(
+            (response) => {
+              console.log('Weapon created successfully:', response);
+              location.reload();
+              this.catalogueService
+                .getCatalog()
+                .subscribe((catalogBack: any) => {
+                  this.catalog = new Catalog(catalogBack);
+                  this.isLoading = false;
+                });
+            },
+            (error) => {
+              console.error('Error creating weapon:', error);
+            }
+          );
 
-        this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
-          this.catalog = new Catalog(catalogBack);
-          this.isLoading = false;
-        });
-      },
-      (error) => {
-        console.error('Error creating categorie:', categorieInstance, " ", error);
-      }
-    );
-  } else {
-    const weaponInstance = new WeaponDTO({
-      name: this.createForm.value.name,
-      price: this.createForm.value.price,
-      categoryId: this.createForm.value.category,
-    });
+          this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+            this.catalog = new Catalog(catalogBack);
+            this.isLoading = false;
+          });
+        },
+        (error) => {
+          console.error(
+            'Error creating categorie:',
+            categorieInstance,
+            ' ',
+            error
+          );
+        }
+      );
+    } else {
+      const weaponInstance = new WeaponDTO({
+        name: this.createForm.value.name,
+        price: this.createForm.value.price,
+        categoryId: this.createForm.value.category,
+      });
 
-    console.log('Weapon created successfully:', weaponInstance);
+      console.log('Weapon created successfully:', weaponInstance);
 
-    this.weaponService.createWeapon(weaponInstance).subscribe(
-      (response) => {
-        console.log('Weapon created successfully:', response);
-        this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
-          this.catalog = new Catalog(catalogBack);
-          this.isLoading = false;
-        });
-      },
-      (error) => {
-        console.error('Error creating weapon:', error);
-      }
-    );
-  }
+      this.weaponService.createWeapon(weaponInstance).subscribe(
+        (response) => {
+          console.log('Weapon created successfully:', response);
+          location.reload();
+          this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+            this.catalog = new Catalog(catalogBack);
+            this.isLoading = false;
+          });
+        },
+        (error) => {
+          console.error('Error creating weapon:', error);
+        }
+      );
+    }
   }
 }
