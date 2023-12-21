@@ -6,6 +6,7 @@ import { Categorie } from 'src/app/model/categorie/categorie.model'; // Update t
 import { Location } from '@angular/common';
 import { CatalogService } from 'src/app/service/catalog/catalog.service';
 import { Catalog } from 'src/app/model/catalog/catalog.model';
+import { CategorieDTO } from 'src/app/model/categorieDTO/categorie-dto.model';
 
 @Component({
   selector: 'app-form',
@@ -26,6 +27,7 @@ export class FormComponent implements OnInit {
       name: '',
       price: '',
       category: [null], // Initialize category form control
+      newCategoryName: '',
     });
   }
 
@@ -41,11 +43,59 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
+  if (this.createForm.value.category == 'nouvelle') {
+    const categorieInstance = new CategorieDTO({
+      name: this.createForm.value.newCategoryName,
+    });
+
+    this.weaponService.createCategorie(categorieInstance).subscribe(
+      (createdCategory: Categorie) => {
+        console.log(
+          'Category created successfully:',
+          createdCategory,
+          'categoryid is ',
+          createdCategory['categoryId']
+        );
+
+        const newCategoryId = createdCategory["categoryId"];
+
+        const weaponInstance = new WeaponDTO({
+          name: this.createForm.value.name,
+          price: this.createForm.value.price,
+          categoryId: newCategoryId,
+        });
+
+        console.log('Weapon created successfully:', weaponInstance);
+
+        this.weaponService.createWeapon(weaponInstance).subscribe(
+          (response) => {
+            console.log('Weapon created successfully:', response);
+            this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+              this.catalog = new Catalog(catalogBack);
+              this.isLoading = false;
+            });
+          },
+          (error) => {
+            console.error('Error creating weapon:', error);
+          }
+        );
+
+        this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
+          this.catalog = new Catalog(catalogBack);
+          this.isLoading = false;
+        });
+      },
+      (error) => {
+        console.error('Error creating categorie:', categorieInstance, " ", error);
+      }
+    );
+  } else {
     const weaponInstance = new WeaponDTO({
       name: this.createForm.value.name,
       price: this.createForm.value.price,
       categoryId: this.createForm.value.category,
     });
+
     console.log('Weapon created successfully:', weaponInstance);
 
     this.weaponService.createWeapon(weaponInstance).subscribe(
@@ -54,14 +104,12 @@ export class FormComponent implements OnInit {
         this.catalogueService.getCatalog().subscribe((catalogBack: any) => {
           this.catalog = new Catalog(catalogBack);
           this.isLoading = false;
-        
-      });
-        // Add any confirmation logic here
+        });
       },
       (error) => {
         console.error('Error creating weapon:', error);
-        // Handle the error as needed
       }
     );
+  }
   }
 }

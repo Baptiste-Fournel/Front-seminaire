@@ -7,7 +7,7 @@
       <th mat-header-cell *matHeaderCellDef>Nom</th>
       <td mat-cell *matCellDef="let element">{{ element.weaponName }}</td>
     </ng-container>
-
+    
     <!-- Name Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>Price</th>
@@ -17,25 +17,32 @@
       <th mat-header-cell *matHeaderCellDef>Supprimer</th>
       <td mat-cell *matCellDef="let element; let i = index">
         <i
-          class="fas fa-trash"
+        class="fas fa-trash"
           alt="Supprimer"
           (click)="supprimer(element.weaponId)"
-        ></i>
+          ></i>
       </td>
+
+      <ng-container matColumnDef="nomCategorie">
+        <th mat-header-cell *matHeaderCellDef>Catégorie</th>
+        <td mat-cell *matCellDef="let element">{{ element["weaponCategory"]["categoryName"] }}</td>
+      </ng-container>
+
       <!-- Name Column -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
           <button
-            mat-raised-button
-            color="primary"
-            (click)="openPopin(element)"
+          mat-raised-button
+          color="primary"
+          (click)="openPopin(element)"
           >
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button></td
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button></td
+        ></ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </ng-container></table
       ></ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </ng-container></table
-></ng-container>
+      

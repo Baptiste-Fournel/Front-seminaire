@@ -16,7 +16,14 @@
                 <mat-option *ngFor="let category of categories" [value]="category['categoryId']">
                     {{ category["categoryName"] }}
                 </mat-option>
+                <mat-option value="nouvelle">
+                    Nouvelle
+                </mat-option>
             </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="createForm.get('category')?.value === 'nouvelle'">
+            <mat-label>Nouvelle Catégorie</mat-label>
+            <input matInput formControlName="newCategoryName" />
         </mat-form-field>
         <button mat-raised-button type="submit">Envoyer</button>
     </form>
