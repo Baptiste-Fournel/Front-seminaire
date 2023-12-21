@@ -23,7 +23,7 @@ export class ServiceViewComponent {
   
 
 
-  displayedColumns: Array<string> = ["nom", "price", "action","supprimer"];
+  displayedColumns: Array<string> = ["nom", "price", "modifier","supprimer"];
   
 
 
