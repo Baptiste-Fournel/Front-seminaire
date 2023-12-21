@@ -1,0 +1,10 @@
+.new-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bouton-popin{
+    display: flex;
+    justify-content: center;
+}

@@ -12,3 +12,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
     padding: 5px; /* Adjust as needed */
   }
+
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: black !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
+  color: #3f51b5 !important;
+}
+
+.mat-mdc-select-panel-above div.mat-mdc-select-panel {
+  background-color: #3f51b5;
+}
+
+.mat-mdc-option.mdc-list-item:hover {
+  background-color: #ffffff !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: black !important;
+}
+
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after, .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+  color: black !important;
+}
+
+.mdc-dialog__surface {
+  align-items: center;
+}
